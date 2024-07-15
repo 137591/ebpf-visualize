@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务仪表盘</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">
+            <img src="./picture/zoltraak-logo.jpg" alt="zoltraak">
+        </div>
+        <div class="header-text">
+            <h1>服务仪表盘</h1>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="icon" id="icon1" title="host">
+            <img src="./picture/host.png" alt="host">
+        </div>
+        <div class="icon" id="icon2" title="pods">
+            <img src="./picture/pods.png" alt="pods">
+        </div>
+        <div class="icon" id="icon3" title="alarm">
+            <img src="./picture/alarm.png" alt="alarm">
+        </div>
+    </div>
+    <div class="container" id="container1">
+        <!-- Container 1 内容 -->
+        <div class="header">
+            <div class="dropdown-container">
+                <div class="dropdown">
+                    <label for="script">Host </label>
+                    <select id="script">
+                        <option value="Host1">Host1</option>
+            
+                        <!-- 其他选项 -->
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <label for="service">metrics*: </label>
+                    <select id="service">
+                        <option value="syscall">syscall</option>
+                        <option value="llc mpki">LLC MPKI</option>
+                        <option value="memory bandwidth">Memory Bandwidth</option>
+
+                        <!-- 其他选项 -->
+                    </select>
+                </div>
+            </div>
+            <!-- <button id="applyTime">时间范围</button> -->
+       
+    </div>
+       
+        <div class="charts">
+            <div class="chart-container">
+                <canvas id="sync"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="fsync"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="epoll_wait"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="sendmmsg"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="connect"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="recvmmsg"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="futex"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="sched_yield"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="semop"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="semctl"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="accept"></canvas>
+            </div>
+        </div>
+        <div class="details">
+            <div class="table-container">
+                <h2>Pod 列表</h2>
+                <table id="podList">
+                    <thead>
+                        <tr>
+                            <th>Pod</th>
+                            <th>Pod 创建时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>px-sock-shop/front-end-6598d7df7-89h9k</td>
+                            <td>7/13/2021, 3:34:31 PM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <h2>请求服务的入站流量</h2>
+                <table id="inboundTraffic">
+                    <thead>
+                        <tr>
+                            <th>请求者</th>
+                            <th>远程地址</th>
+                            <th>延迟 (P99)</th>
+                            <th>错误率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10.105.192.195</td>
+                            <td>::</td>
+                            <td>2s</td>
+                            <td>2.0%</td>
+                        </tr>
+                        <tr>
+                            <td>10.105.192.196</td>
+                            <td>::</td>
+                            <td>542.2ms</td>
+                            <td>0.0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <h2>慢请求样本</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="container2" style="display:none;">
+        <!-- Container 2 内容 -->
+        <div class="header">
+                <div class="dropdown-container">
+                    <div class="dropdown">
+                        <label for="script2">pods: </label>
+                        <select id="script2">
+                            <option value="pods1">pods1</option>
+                            <option value="pods2">pods2</option>
+                            <!-- 其他选项 -->
+                        </select>
+                    </div>
+                    <div class="dropdown">
+                        <label for="service2">metrics*: </label>
+                        <select id="service2">
+                            <option value="cpu">CPU</option>
+                            <option value="memory">Memory</option>
+                            <option value="corepmu">CORE PMU</option>
+                            <option value="syscall">syscall</option>
+                            <option value="irq">irq</option>
+                            <option value="context">context switch</option>
+                            <option value="page">Page fault</option>
+                            <option value="rtt">Rtt</option>
+                            <option value="tcp">TCP</option>
+                            <option value="iosize">IO Size</option>
+
+                            <!-- 其他选项 -->
+                        </select>
+                    </div>
+                </div>
+                <!-- <button id="applyTime">时间范围</button> -->    
+        </div>
+        <div class="charts"></div>
+        <!-- 添加其他内容 -->
+    </div>
+    <div class="container" id="container3" style="display:none;">
+        <!-- Container 3 内容 -->
+        <h2>Container 3 内容</h2>
+        <!-- 添加其他内容 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <!-- 引入主 JavaScript 文件 -->
+     <script src="script.js" type="module"></script>
+</body>
+</html>
+
+
